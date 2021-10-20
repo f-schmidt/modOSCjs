@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <title>Socket.IO osc</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script type="text/javascript"></script>
+</head>
+
+<body style="background-color:grey;">
+  <div class="slider2">
+    <input type="range" min="0" max="127" value="50" class="slider2" id="myRange">
+    <p>Value: <span id="demo"></span></p>
+  </div>
+  <script>
+    var slider2 = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    var socket = io();
+    output.innerHTML = slider2.value; // Display the default slider value
+    // Update the current slider value (each time you drag the slider handle)
+    slider2.oninput = function() {
+      output.innerHTML = this.value;
+      socket.emit('slider2', this.value);
+    }
+  </script>
+</body>
+
+</html>
